@@ -3,40 +3,25 @@
 
 using namespace std;
 
-int main() {
-    Item items[MAX];
-    int count = 0;
-    int choice;
+void createItem(Item *items, int *count) {
+    if (*count >= MAX) {
+        cout << "Inventory full.\n";
+        return;
+    }
 
-    do {
-        cout << "\n1. Add Item\n";
-        cout << "2. View Items\n";
-        cout << "3. Update Item\n";
-        cout << "4. Delete Item\n";
-        cout << "5. Exit\n";
-        cout << "Choose: ";
-        cin >> choice;
+    cout << "Enter ID: ";
+    cin >> items[*count].id;
 
-        switch (choice) {
-            case 1:
-                createItem(items, &count);
-                break;
-            case 2:
-                displayItems(items, count);
-                break;
-            case 3:
-                updateItem(items, count);
-                break;
-            case 4:
-                deleteItem(items, &count);
-                break;
-            case 5:
-                cout << "Exiting...\n";
-                break;
-            default:
-                cout << "Invalid choice.\n";
-        }
-    } while (choice != 5);
+    cout << "Enter name: ";
+    cin.ignore();
+    cin.getline(items[*count].name, 50);
 
-    return 0;
+    cout << "Enter quantity: ";
+    cin >> items[*count].quantity;
+
+    cout << "Enter price: ";
+    cin >> items[*count].price;
+
+    (*count)++;
+    cout << "Item added successfully.\n";
 }
